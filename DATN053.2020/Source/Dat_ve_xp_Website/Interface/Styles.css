@@ -1,0 +1,166 @@
+﻿nav.navbar {
+    background: linear-gradient(to right, #151111, #8e6c24);
+}
+.logo {
+    margin: 20px 0;
+}
+.dangnhapdangky {
+    margin: auto;
+    vertical-align: middle;
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+.khungdangnhapdangky {
+    border: 1px solid #c6c6c6;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 7px;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+    font-weight: bold;
+    margin-right: 66px;
+}
+.popupdangkydangnhap > .nav-item > .nav-link {
+    color: #000;
+}
+#btndangnhap {
+    color: #FFF;
+}
+img {
+    /*max-width: -webkit-fill-available;*/
+}
+.card {
+    margin: 10px;
+}
+.card-body {
+    height: 167px;
+}
+#btntimkiem {
+    background-color: #8d6b24;
+    color: #fff;
+    border-color: #fff;
+    font-weight: bold;
+}
+    #btntimkiem:hover {
+        background-color: orange
+    }
+h1, h2, h3, h4, .media-body {
+    color: #fff;
+}
+.modal-title {
+    color: blue;
+}
+#dropdownMenuLink {
+    background-color: orange;
+}
+.table td, .table th {
+    background-color: aqua;
+}
+.table-active, .table-active > td, .table-active > th {
+    background-color: #fff;
+}
+.table thead th {
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+hr {
+    border-top: 1px solid #fff;
+}
+
+/*---------------------------------------------------------*/
+.imgfooter {
+    width: 160px;
+    height: auto;
+    margin: -27px;
+    margin-left: -8px;
+    padding: 10px;
+}
+
+.headerfooter {
+    height: 200px;
+    color: #fff;
+    background: linear-gradient(to right, #151111, #8e6c24);
+}
+
+.header-1 {
+    float: left;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+.header-2 {
+    float: right;
+    margin-right: 100px;
+    margin-top: 20px;
+    text-align: right;
+}
+
+.footer {
+    clear: left;
+    background-color: #000;
+    height: 40px;
+    color: #fff;
+}
+
+.footer-1 {
+    float: left;
+    margin-left: 100px;
+    margin-top: 10px;
+}
+
+.footer-2 {
+    float: right;
+    margin-right: 100px;
+    margin-top: -4px;
+    margin-left: 5px;
+}
+
+.ulfooter {
+    display: flex;
+    list-style-type: none;
+}
+
+.fab {
+    color: #fff;
+    margin-right: 50px;
+}
+
+h3 {
+    line-height: 50px;
+}
+
+@media screen and (max-width: 992px) {
+    * {
+        float: none !important;
+        clear: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .headerfooter {
+        height: 350px !important;
+        padding-left: 50px !important;
+    }
+
+    .header-2 {
+        text-align: left !important;
+    }
+
+    .fab {
+        margin-right: 50px !important;
+    }
+
+    .footer {
+        padding: 25px !important;
+        text-align: center;
+    }
+
+    .footer-2 {
+        margin-top: 20px !important;
+        margin-left: 350px !important;
+    }
+}
+

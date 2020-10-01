@@ -1,0 +1,1002 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Dat_ve_xp_Website.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <%--Begin css Boostrap--%>
+    <%--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />--%>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <%--End css Boostrap--%>
+    <link href="Interface/Styles.css" rel="stylesheet" />
+    <link href="fontawesome-all.min.css" rel="stylesheet" />
+     <script src="../ckeditor/ckeditor.js"></script>
+    <script src="../Interface/ThuVien.js"></script>
+    <script src="https://kit.fontawesome.com/615f02ad08.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/pure-md5@latest/lib/index.js"></script>
+    <title>Website đặt vé xem phim online</title>
+</head>
+<body style="background: url(../ThuatToan/image/body_bg.gif) #6f6d72;">
+
+    <!-- Popup đăng nhập -->
+    <div class="modal fade" id="dangnhap" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-headers" style="font-style: oblique; font-weight: bold; font-size: 20px; color: blue; text-align:center; padding:5px">
+                    Đăng ký hoặc đăng nhập!
+                    <button type="button" id="closedangkydangnhap" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <%--Begin đây là mục tab panel--%>
+                    <style>
+                        a[class="nav-link active"] {
+                            color: #fff !important;
+                            font-weight: bold !important;
+                            background-color: #007bff !important;
+                        }
+
+                        ul.nav-tabs {
+                            margin: 10px;
+                        }
+                    </style>
+                    <ul class="nav nav-tabs popupdangkydangnhap">
+                            
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tab1">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tab2">Đăng ký</a>
+                        </li>
+                    </ul>
+                    <%--End đây là mục tab panel--%>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+                        <%--Begin tab1--%>
+                        <div id="tab1" class="container tab-pane active">
+                            <div class="form-label-group">
+                                <label for="inputEmail">Email hoặc Username</label>
+                                <input type="email" id="usernameemaildangnhap" name="usernameemaildangnhap" class="form-control" placeholder="Địa chỉ Email" required autofocus>
+                            </div>
+                            <div class="form-label-group">
+                                <label for="inputPassword">Mật khẩu</label>
+                                <input type="password" id="matkhaudangnhap" name="matkhaudangnhap" class="form-control" placeholder="Mật khẩu" required>
+                            </div>
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" value="remember-me" id="ghinhodangnhap">
+                                    Ghi nhớ đăng nhập
+                                </label>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="buttondangnhap" type="button" class="btn btn-primary" style="font-weight:bold">Đăng nhập</button>
+                            </div>
+                        </div>
+                        <%--End tab2--%>
+
+                        <%--Begin tab2--%>
+                        <div id="tab2" class="container tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Họ của bạn</label>
+                                    <input type="text" class="form-control" id="hocuaban" placeholder="" value="" required />
+                                    <div class="invalid-feedback">
+                                        Vui lòng nhập họ của bạn!
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Tên của bạn</label>
+                                    <input type="text" class="form-control" id="tencuaban" placeholder="" value="" required />
+                                    <div class="invalid-feedback">
+                                        Vui lòng nhập tên của bạn
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="username">Username - Dùng để đăng nhập</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="username" placeholder="Username" required/>
+                                    <div class="invalid-feedback" style="width: 100%;">
+                                        Vui lòng nhập tên người dùng.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email">Email <span class="text-muted"></span></label>
+                                <input type="email" class="form-control" id="diachiemail" placeholder="Tuyen@example.com" required/>
+                                <div class="invalid-feedback">
+                                    Xin hãy nhập đúng địa chỉ Email
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tel">Số điện thoại <span class="text-muted"></span></label>
+                                <input type="tel" class="form-control" id="sodienthoai" placeholder="0945XXXXXX" required />
+                                <div class="invalid-feedback">
+                                    Xin hãy nhập đúng số điện thoại
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dateofbirth">Ngày sinh <span class="text-muted"></span></label>
+                                <input type="date" class="form-control" id="ngaysinh" placeholder="00/00/0000" required />
+                                <div class="invalid-feedback">
+                                    Xin hãy chọn đúng ngày sinh
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Giới tính</label>
+                                <select class="form-control" id="gioitinh">
+                                    <option>Chọn giới tính</option>
+                                    <option>Nam</option>
+                                    <option>Nữ</option>
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="matkhau" placeholder="" value="" required />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Xác nhận mật khẩu</label>
+                                    <input type="password" class="form-control" id="nhaplaimatkhau" placeholder="" value="" required />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" class="form-control" id="diachi" placeholder="Nhập địa chỉ mà bạn đang ở" required>
+                                <div class="invalid-feedback">
+                                    Nhập địa chỉ mà bạn đang ở
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="buttondangky" type="button" class="btn btn-primary"  style="font-weight:bold">Đăng ký</button>
+                            </div>
+                        </div>
+                        <%--End tab2--%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--End Popup đăng nhập--%>
+
+    <%--Begin phần logo--%>
+    <div class="container">
+        <div class="row logo">
+            <div class="col">
+                <img src="../Interface/logo.jpg" alt="Alternate Text" style="width: 8rem" />
+            </div>
+            <div class="col"></div>
+            <div class="col dangnhapdangky">
+                <div id="dangkydangnhapnguoidung"><a href="javascript:;" data-toggle="modal" data-target="#dangnhap" id="btndangnhap">Đăng nhập/Đăng ký</a></div>
+            </div>
+        </div>
+    </div>
+    <%--End phần logo--%>
+
+    <%--Begin thanh NAV--%>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-xl">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample07XL">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="TrangChu.aspx">TRANG CHỦ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../Interface/PhimDangChieu.aspx">ĐANG CHIẾU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="TinTuc.aspx">TIN TỨC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">LIÊN HỆ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">HỖ TRỢ</a>
+                    </li>
+                </ul>
+                <div class="form-inline">
+                    <input id="inputtimkiem" class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search" />
+                    <button id="btntimkiem" class="btn btn-outline-success my-2 my-sm-0" onclick="hamtimkiemphim()">Tìm kiếm</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <%--End thanh NAV--%>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <%--<footer class="blog-footer text-center">--%>
+        <hr />
+        <%--<p>Nhóm thực hiện báo cáo tốt nghiệp</p>--%>
+        <div class="container-footer">
+           <div class="headerfooter">
+                <div class="header-1">
+                    <h3>CÔNG TY TNHH MT FILM</h3>
+                    <p>Địa chỉ: 140 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP.Hồ Chí Minh<br/>
+                    Hotline: 0808080808 - Fax: 0808080808<br/>
+                    Email: lienhemtfilm@hufi.com</p>
+                    <img class="imgfooter" src="../Interface/hinhdathongbao.png"/>
+                </div>
+                <div class="header-2">
+                    <h3>CHÍNH SÁCH VÀ QUY ĐỊNH</h3>
+                    <p>Chính sách và quy định chung<br/>
+                    Quy định thanh toán và giao hàng<br/>
+                    Chính sách bảo hành và đổi trả<br/>
+                    Chunhs sách bảo mật thông tin<br/>
+                    Quy trình xử lý khiếu nại</p>
+                </div>
+           </div>
+           <div class="footer">
+                <div class="footer-1">
+                    Copyright <i class="far fa-copyright"></i> Công Ty TNHH MT Film. All rights reserved
+                </div>
+                <div class="footer-2">
+                    <ul class="ulfooter">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+           </div>
+        </div>
+        <%--<p id="bientam" name="bientam"></p>--%>
+        <%--<p id="bientam">Thông tin gì đó</p>--%>
+    <%--</footer>--%>
+    <%--Begin Script Boostrap--%>
+    <%--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--%>
+    <script src="../Ajax/jquery.js"></script>
+    <script src="../Ajax/popper.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <%--End Script Boostrap--%>
+</body>
+
+
+<script type="text/javascript">
+
+
+    //Viết câu lệnh cho nút đăng ký
+    //Click vào button đăng ký thì vào hàm này
+    $(document).ready(function () {
+
+        $("#buttondangky").click(function () {
+            (async () => {
+                //Xét 3 trường hợp
+                if (hamkiemtradulieudangky() != true) {//TH1: Dữ liệu nhập vào không hợp lệ
+                    alert(hamkiemtradulieudangky());
+                }
+                else {//TH2: Kiểm tra xem có bị trùng UserName hay không
+                    var username = await document.getElementById('username').value.trim();
+                    var ketquausertrunglap;
+                    await check_username_exist(username).then(result => { ketquausertrunglap = result; });
+                    if (ketquausertrunglap.toLowerCase() == username.toLowerCase()) {//Nếu bị trùng thì báo lỗi
+                        alert("Báo lỗi: Tên người dùng đã tồn tại!");
+                    }
+                    else {//Thêm người dùng vào CSDL
+                        //alert("Thêm người dùng vào CSDL");
+
+                        //Get hết data từ form
+                        var hovaten = document.getElementById("hocuaban").value.trim() + " " + document.getElementById("tencuaban").value.trim();
+                        var diachiemail = document.getElementById("diachiemail").value.trim();
+                        var sodienthoai = document.getElementById("sodienthoai").value.trim();
+                        var ngaysinh = document.getElementById("ngaysinh").value;
+                        var gioitinh = document.getElementById("gioitinh").selectedIndex;
+                        if (gioitinh == 1)
+                            gioitinh = "Nam";
+                        else
+                            gioitinh = "Nữ";
+                        var matkhau = document.getElementById("matkhau").value;
+                        var diachi = document.getElementById("diachi").value;
+                        //Lấy USERID
+                        
+                        var sql = "select max(USERID) from MEMBER";
+                        var userid = "U" + await get1odulieutudb(sql);
+
+                        var sql = "insert into MEMBER values ('" + userid + "','" + username.toLowerCase() + "', N'" + hovaten + "', '" + ngaysinh + "', N'" + diachi + "', '" + sodienthoai + "', N'" + gioitinh + "', '" + matkhau + "','" + diachiemail + "', null)";
+                        //Lưu thông tin người dùng xuống CSDL
+                        var ketqualuuthongtinnguoidung;
+                        await insertdatabase(sql).then((r) => { ketqualuuthongtinnguoidung = r; });
+                        if (ketqualuuthongtinnguoidung == "true")
+                        {
+                            await luucookie("user", username.toLowerCase()).then((r) => { });
+                            await luucookie("hovaten", hovaten).then(r => { })
+
+                            //Lấy ID của User đưa vào cookie để gợi ý
+                            var sql = "select USERID from MEMBER where MEMBER.MemberLoginName = '" + username + "'";
+                            var userid = await get1odulieutudb(sql);
+
+                            await luucookie("userid", userid).then(r => { })
+                            alert("Thông báo: Bạn đã đăng ký thành viên THÀNH CÔNG!");
+                            //var vcookie = await getCookie("user");
+                            //await alert("Ggias trị của Cookie là: " + vcookie);
+                            document.getElementById('closedangkydangnhap').click();
+                            if (await getCookie('hovaten') != null)
+                                document.getElementById('btndangnhap').innerText = await getCookie("hovaten");
+                        }
+                        else
+                            alert("Đăng ký không thành công! Có lỗi do kỹ thuật, vui lòng liên hệ với bộ phận kỹ thuật để giải quyết!");
+                        //alert("Dữ liệu: " + username + " " + hovaten + " " + diachiemail + " " + sodienthoai + " " + ngaysinh + " " + gioitinh + " " + matkhau + " " + diachi);
+                    }
+                    
+                }
+            })()
+          
+        });
+    });
+    
+
+    //Viết câu lệnh cho nút đăng nhập
+    $(document).ready(function () {
+        $("#buttondangnhap").click(function () {
+            (async () => {
+                if (kiemtradangnhaphople() != true)
+                    alert(kiemtradangnhaphople());
+                else {
+                    var username = await document.getElementById('usernameemaildangnhap').value.trim().toLowerCase();
+                    var password = await document.getElementById('matkhaudangnhap').value.trim();
+                    var ketquadangnhap;
+                    await checkuservapasstologin(username, password).then(r => { ketquadangnhap = r });
+                    if (ketquadangnhap.toLowerCase() == username) {
+                        alert("Đăng nhập thành công!");
+
+                        await luucookie("user", username.toLowerCase()).then((r) => { });
+
+                        //Lấy tên đầy đủ từ CSDL lên và đưa vào cookie
+                        var sql = "select Surname from MEMBER where MEMBER.MemberLoginName = '" + username + "'";
+                        var hovaten = await get1odulieutudb(sql);
+                        await luucookie("hovaten", hovaten).then(r => { })
+
+                        //Lấy ID của User đưa vào cookie để gợi ý
+                        var sql = "select USERID from MEMBER where MEMBER.MemberLoginName = '" + username + "'";
+                        var userid = await get1odulieutudb(sql);
+                        await luucookie("userid", userid).then(r => { })
+
+                        document.getElementById("closedangkydangnhap").click();
+                        //alert("Username: " + await getCookie("user") + " Tên thật: " + await getCookie("hovaten"));
+                        //if (await getCookie('hovaten') != null)
+                        //    document.getElementById('btndangnhap').innerText = await getCookie("hovaten");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("Đăng nhập không thành công!");
+                    }
+
+                }
+            })()
+        });
+
+    });
+
+    (async () => {
+        if (await getCookie('hovaten') != null) {
+            var sql = "select Privilege from MEMBER where MemberLoginName = '" + await getCookie('user') + "'";
+            var quyen = await get1odulieutudb(sql);
+            //alert(quyen);
+            if (quyen == "Admin") {
+                //document.getElementById('dangkydangnhapnguoidung').innerHTML = "<a  href='#'>" + await getCookie("hovaten") + "</a><small>/<a id='dangxuat' href='#'>Đăng xuất</a></small>";
+                document.getElementsByClassName('col dangnhapdangky')[0].innerHTML = "<div class=\"dropdown\"><a class=\"btn btn-secondary dropdown-toggle\" href=\"../Interface/ThanhVien.aspx\" role=\"button\" id=\"dropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + await getCookie("hovaten") + "</a> <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\"><a class=\"dropdown-item\" href=\"../Interface/QuanLyDanhSachPhim.aspx\">Quản lý danh sách phim</a><a class=\"dropdown-item\" href=\"../Interface/QuanLyThanhVien.aspx\">Quản lý thành viên</a><a class=\"dropdown-item\" href=\"../Interface/QuanLyTinTuc.aspx\">Quản lý tin tức</a><a class=\"dropdown-item\" href=\"../Interface/QuanLyDanhSachDatVe.aspx\">Quản lý đặt vé</a><a class=\"dropdown-item\" href=\"../Interface/ThongKe.aspx\">Thống kê</a><a class=\"dropdown-item\" href=\"javascript:;\" id=\"dangxuat\" onclick=\"dangxuat()\">Đăng xuất</a></div></div>";
+                $('.dangnhapdangky').removeClass();
+            }
+            else {
+                document.getElementsByClassName('col dangnhapdangky')[0].innerHTML = "<div class=\"dropdown\"><a class=\"btn btn-secondary dropdown-toggle\" href=\"../Interface/ThanhVien.aspx\" role=\"button\" id=\"dropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + await getCookie("hovaten") + "</a> <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuLink\"><a class=\"dropdown-item\" href=\"../Interface/ThanhVien.aspx\">Trang thành viên</a><a class=\"dropdown-item\" href=\"javascript:;\" id=\"dangxuat\" onclick=\"dangxuat()\">Đăng xuất</a></div></div>";
+                $('.dangnhapdangky').removeClass();
+            }
+        }
+        
+    })()
+
+    function dangxuat() {
+        (async () => {
+            await xoacookie("hovaten").then(r => { });
+            await xoacookie("user").then(r => { });
+            window.location = "TrangChu.aspx";
+        })()
+    }
+    //Viết hàm cho nút đăng xuất
+    $(document).ready(function () {
+        $("#dangxuat").click(function () {
+            (async () => {
+                //alert("ẻdfn");
+                await xoacookie("hovaten").then(r => { });
+                await xoacookie("user").then(r => { });
+
+                //await xoacookie("ArrayMovie" + await getCookie("userid")).then(r => { });
+
+                //await xoacookie("userid").then(r => { });
+                //await xoacookie("ArrayMovie37").then(r => { });
+                //eraseCookie("hovaten");
+                //$cookies.remove('hovaten');
+                window.location.reload();
+            })()
+
+        })
+    })
+</script>
+
+    <script type="text/javascript">
+            (async () => {
+                if ($_GET('lenh') != "") {
+                    if ($_GET('lenh') == "thongtinphim") {
+                        
+
+                        var sql = "select TITLE from MOVIES WHERE MOVIEID = " + await $_GET('id');
+                        var title = await get1odulieutudb(sql);
+                        document.getElementById('tenphim').innerText = title;
+
+                        //Load dữ liệu lên popup đặt vé
+                        //Load rạp chiếu
+                        var sql = "select DISTINCT (MOVIETHEATER.MovieTheaterName) from MOVIES, PROJECTION, MOVIETHEATER, ROOM WHERE MOVIES.MOVIEID = PROJECTION.MovieID and ROOM.RoomID = PROJECTION.RoomID and ROOM.MovieTheaterID = MOVIETHEATER.MovieTheaterID and MOVIES.MOVIEID = " + $_GET('id');
+                        var rap = await getlistdata(sql);
+                        var list_rap = rap.split(",");
+                        document.getElementById('rapchieuphim').innerHTML = "<option>Chọn rạp chiếu</option>";
+                        document.getElementById('ngaychieuphim').innerHTML = "<option>Chọn ngày chiếu</option>";
+                        document.getElementById('giochieuphim').innerHTML = "<option>Chọn giờ chiếu</option>";
+                        document.getElementById('phongchieuphim').innerHTML = "<option>Chọn phòng chiếu</option>";
+                        for (var i = 0; i < list_rap.length; i++)
+                        {
+                        document.getElementById('rapchieuphim').innerHTML += "<option>" + list_rap[i] + "</option>";
+                        }
+                        an_hien_ghe_ngoi();
+                        //var sl = document.getElementById('rapchieuphim');
+                        //alert(sl.options[sl.selectedIndex].value);
+                        //alert(document.getElementById('rapchieuphim').value);
+                    }
+                }
+            })()
+        function loadngaychieu() {
+            (async () => {
+                
+                var sql = "select distinct Showday from MOVIES, PROJECTION, MOVIETHEATER, ROOM WHERE MOVIES.MOVIEID = PROJECTION.MovieID and ROOM.RoomID = PROJECTION.RoomID and ROOM.MovieTheaterID = MOVIETHEATER.MovieTheaterID and MOVIES.MOVIEID = " + $_GET('id') + " and MovieTheaterName = N'" + document.getElementById('rapchieuphim').value + "'";
+                var ngaychieu = await getlistdata(sql);
+                var list_ngaychieu = ngaychieu.split(",");
+                document.getElementById('ngaychieuphim').innerHTML = "<option>Chọn ngày chiếu</option>";
+                document.getElementById('giochieuphim').innerHTML = "<option>Chọn giờ chiếu</option>";
+                document.getElementById('phongchieuphim').innerHTML = "<option>Chọn phòng chiếu</option>";
+                for (var i = 0; i < list_ngaychieu.length; i++) {
+                    var d = new Date(list_ngaychieu[i]);
+                    document.getElementById('ngaychieuphim').innerHTML += "<option>" + d.getFullYear() + "-" + (Number(d.getMonth()) + 1).toString() + "-" + d.getDate() + "</option>";
+                }
+                an_hien_ghe_ngoi();
+                //document.getElementById('ngaychieuphim').innerHTML += "<option>" + document.getElementById('rapchieuphim').value + "</option>";
+                
+            })()
+        }
+
+        function loadphongchieu() {
+            (async () => {
+                var sql = "select distinct RoomName from MOVIES, PROJECTION, MOVIETHEATER, ROOM WHERE MOVIES.MOVIEID = PROJECTION.MovieID and ROOM.RoomID = PROJECTION.RoomID and ROOM.MovieTheaterID = MOVIETHEATER.MovieTheaterID and MOVIES.MOVIEID = " + $_GET('id') + " and MovieTheaterName = N'" + document.getElementById('rapchieuphim').value + "' and Showday = '" + document.getElementById('ngaychieuphim').value + "'";
+                var phongchieu = await getlistdata(sql);
+                var list_phongchieu = phongchieu.split(",");
+                document.getElementById('phongchieuphim').innerHTML = "<option>Chọn phòng chiếu</option>";
+                document.getElementById('giochieuphim').innerHTML = "<option>Chọn giờ chiếu</option>";
+                if (list_phongchieu.length > 0)
+                    for (var i = 0; i < list_phongchieu.length; i++) {
+                        document.getElementById('phongchieuphim').innerHTML += "<option>" + list_phongchieu[i] + "</option>";
+                    }
+                an_hien_ghe_ngoi();
+            })()
+        }
+
+        function loadgiochieu() {
+            (async () => {
+                //alert("ưhdftn");
+
+                var sql = "select distinct Hours from MOVIES, PROJECTION, MOVIETHEATER, ROOM WHERE MOVIES.MOVIEID = PROJECTION.MovieID and ROOM.RoomID = PROJECTION.RoomID and ROOM.MovieTheaterID = MOVIETHEATER.MovieTheaterID and MOVIES.MOVIEID = " + $_GET('id') + " and MovieTheaterName = N'" + document.getElementById('rapchieuphim').value + "' and Showday = '" + document.getElementById('ngaychieuphim').value + "' and RoomName = '" + document.getElementById('phongchieuphim').value + "'";
+                var giochieu = await getlistdata(sql);
+                var list_giochieu = giochieu.split(",");
+                document.getElementById('giochieuphim').innerHTML = "<option>Chọn giờ chiếu</option>";
+                if (list_giochieu.length > 0)
+                for (var i = 0; i < list_giochieu.length; i++)
+                {
+                    document.getElementById('giochieuphim').innerHTML += "<option>" + list_giochieu[i].split(":00.")[0] + "</option>";
+                }
+                an_hien_ghe_ngoi();
+            })()
+        }
+
+        function loadghengoi() {
+            (async () => {
+                an_hien_ghe_ngoi();
+                var ngaychieu = document.getElementById('ngaychieuphim').value;
+                var giochieu = document.getElementById('giochieuphim').value;
+
+                var sql = "select distinct ProjectionID from MOVIES, PROJECTION, MOVIETHEATER, ROOM WHERE MOVIES.MOVIEID = PROJECTION.MovieID and ROOM.RoomID = PROJECTION.RoomID and ROOM.MovieTheaterID = MOVIETHEATER.MovieTheaterID and MOVIES.MOVIEID = " + $_GET('id') + " and MovieTheaterName = N'" + document.getElementById('rapchieuphim').value + "' and Showday = '" + document.getElementById('ngaychieuphim').value + "' and RoomName = '" + document.getElementById('phongchieuphim').value + "' and Hours like '%" + document.getElementById('giochieuphim').value + "%'";
+                var idsuatchieu = await getlistdata(sql);
+                idsuatchieu = idsuatchieu.split(",")[0];
+
+                var sql = "select SeatID from SEAT, PROJECTION where SEAT.ProjectionID = PROJECTION.ProjectionID and PROJECTION.ProjectionID = "+ idsuatchieu;
+                var list_ghe_ngoi = await getlistdata(sql);
+                //list_ghe_ngoi = list_ghe_ngoi.split(",");
+                var mangghengoidadatcho = list_ghe_ngoi.split(",");//["C4", "A2", "H5"];
+                for (var i = 0; i < mangghengoidadatcho.length; i++) {
+                    await Disable_ghedaconguoidat(mangghengoidadatcho[i].toString().trim());
+                }
+            })()
+        }
+
+        function Disable_ghedaconguoidat(soghe) {
+            //document.getElementById(soghe).classList.toggle("chongheso");
+            //document.getElementById("ghedachon").innerHTML += soghe + " ";
+
+            //desabled cho nút đã chọn
+            document.getElementById(soghe).disabled = true;
+            document.getElementById(soghe).classList = "btn btn-outline-danger chongheso";
+        }
+
+        function an_hien_ghe_ngoi() {
+            //alert(document.getElementById('giochieuphim').selectedIndex);
+            if (document.getElementById('giochieuphim').selectedIndex != "0" && document.getElementById('giochieuphim').value.trim() != "")
+                document.getElementById('group-ghengoi').classList.remove("d-none");
+            else
+                document.getElementById('group-ghengoi').classList.add("d-none");
+            document.getElementById('ghedachon').innerHTML = "";
+            hienhettatcacacghengoi();
+        }
+
+        function hienhettatcacacghengoi() {
+            for (var i = 1; i <= 9; i++)
+            {
+                //Hàng ghế A
+                var ghengoi = document.getElementById("A" + i.toString());
+                if (ghengoi.disabled == true)
+                {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế B
+                var ghengoi = document.getElementById("B" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế C
+                var ghengoi = document.getElementById("C" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế D
+                var ghengoi = document.getElementById("D" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế E
+                var ghengoi = document.getElementById("E" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế F
+                var ghengoi = document.getElementById("F" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế G
+                var ghengoi = document.getElementById("G" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế H
+                var ghengoi = document.getElementById("H" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế I
+                var ghengoi = document.getElementById("I" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế J
+                var ghengoi = document.getElementById("J" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+
+                //Hàng ghế K
+                var ghengoi = document.getElementById("K" + i.toString());
+                if (ghengoi.disabled == true) {
+                    ghengoi.classList = "btn btn-outline-primary";
+                    ghengoi.classList.remove("chongheso");
+                    ghengoi.disabled = false;
+                }
+            }
+        }
+
+        function clickchonlainghe() {
+            loadghengoi();
+            document.getElementById("ghedachon").innerHTML = "";
+            hambattatdatve();
+        }
+
+        function hambattatdatve() {
+                if (document.getElementById('ghedachon').innerHTML == "")
+                    document.getElementById('buttondatve').disabled = true;
+                else
+                    document.getElementById('buttondatve').disabled = false;
+
+            }
+        //Đây là hàm đặt vé, rất quan trọng
+        function datveonline() {
+            (async () => {
+                var rap = document.getElementById('rapchieuphim').value;
+                var ngaychieu = document.getElementById('ngaychieuphim').value;
+                var giochieu = document.getElementById('giochieuphim').value;
+                var idphim = $_GET('id');
+                var list_ghe_ngoi = document.getElementById('ghedachon').innerHTML;
+                list_ghe_ngoi = list_ghe_ngoi.split(",");
+
+                var sql = "select distinct ProjectionID from MOVIES, PROJECTION, MOVIETHEATER, ROOM WHERE MOVIES.MOVIEID = PROJECTION.MovieID and ROOM.RoomID = PROJECTION.RoomID and ROOM.MovieTheaterID = MOVIETHEATER.MovieTheaterID and MOVIES.MOVIEID = " + $_GET('id') + " and MovieTheaterName = N'" + document.getElementById('rapchieuphim').value + "' and Showday = '" + document.getElementById('ngaychieuphim').value + "' and RoomName = '" + document.getElementById('phongchieuphim').value + "' and Hours like '%" + document.getElementById('giochieuphim').value + "%'";
+                var idsuatchieu = await getlistdata(sql);
+                idsuatchieu = idsuatchieu.split(",")[0];
+                
+
+                //Chèn cái ghế đó vào DB
+                var sql = "insert into SEAT values ('" + list_ghe_ngoi[0] + "', " + idsuatchieu + ", N'Đã đặt')";
+
+                if (list_ghe_ngoi.length > 1)
+                    for (var i = 1; i < list_ghe_ngoi.length; i++)
+                    {
+                        if (list_ghe_ngoi[i].trim() != "")
+                        sql += ",('" + list_ghe_ngoi[i] + "', " + idsuatchieu + ", N'Đã đặt')";
+                    }
+                
+                var insert_ghe = await insertdatabase(sql);
+                if (insert_ghe == "true")
+                    alert("Đặt ghế thành công");
+                var date_phim = new Date(ngaychieu);
+                var giave = "50000";
+                if (date_phim.getDay() == 0)
+                    giave = "70000";
+                var sql = "select COUNT(*) from TICKETINGLISTONLINE where USERID = '" + await getCookie('userid') + "' and ProjectionID = '" + idsuatchieu + "'";
+                var soluongticket = await get1odulieutudb(sql);
+                if (soluongticket.trim() == "0") {
+                    var sql = "insert into [TICKETINGLISTONLINE] values ((select count([VerificationID])+1 from TICKETINGLISTONLINE), '" + await getCookie('userid') + "', " + idsuatchieu + ", N'Đã đặt', " + giave + ")";
+                    if (await insertdatabase(sql) == "true")
+                        alert("Lưu ticket thành công");
+                }
+                var phongchieu = document.getElementById('phongchieuphim').value;
+                var sove = list_ghe_ngoi.length-1;
+                var soghe = "";
+                for (var i = 0; i < list_ghe_ngoi.length - 1; i++)
+                {
+                    soghe += list_ghe_ngoi[i].toString() + ", ";
+                }
+                soghe = soghe.substring(soghe, soghe.length - 2);
+                window.location = "ThongTinVe.aspx?phongchieu=" + phongchieu + "&sove=" + sove + "&soghe=" + soghe + "&ngaychieu=" + ngaychieu + "&giochieu=" + giochieu;
+            })()
+            
+        }
+
+        function clickdangnhap() {
+            (async () => {
+                if (await getCookie('user') == null){
+                    document.getElementById("btndangnhap").click();
+                    document.getElementById("closedatve").click();
+                }
+                else 
+                //Tiến hành cho đặt vé
+                datveonline();
+            })()
+
+        }
+
+        function insertbinhluan() {
+            (async () => {
+                var rating = document.getElementById('rating').selectedIndex+1;
+
+                var comment_content = document.getElementById('cmtcontent').value.trim();
+
+                //Gàn buột, chỉ được Comment 1 lần
+                var _userid = await getCookie("userid");
+                var _sql_cmt_motlan = "select count(*) from COMMENT where USERID = '" + _userid + "' and MOVIEID = '" + $_GET("id") + "'";
+                if (await get1odulieutudb(_sql_cmt_motlan) != "0")
+                {
+                    alert("Bạn đã Review cho phim này rồi!");
+                    return;
+                }
+
+
+                var sql = "insert into RATINGS values ('" + await getCookie("userid") + "','" + $_GET("id") + "', '" + rating + "', null)";
+                if (comment_content != "") {
+                    if (await insertdatabase(sql) == "true") {
+                        var sql = "insert into COMMENT values ((select count(CommentID)+1 from COMMENT), '" + await getCookie('userid') + "', '" + $_GET("id") + "', N'" + comment_content + "')";
+                        if (await insertdatabase(sql) == "true") {
+                            alert("Bình luận và đánh giá thành công");
+                            window.location.reload();
+                        }
+                    }
+                    else
+                        alert("Bạn chưa đăng nhập hoặc đã review cho phim này rồi");
+                }
+                else
+                    alert("Bình luận phim đi!");
+            })()
+        }
+
+        function huyve(projectioid, seatid, userid) {
+            (async () => {
+                var kiemtradaxhuyvechua = await get1odulieutudb("select COUNT(*) from [SEAT CANCEL] where ProjectionID = '" + projectioid + "' and Status = N'" + seatid + "," + userid + "'");
+                if (kiemtradaxhuyvechua.trim() == "1")
+                {
+                    alert("Bạn đã hủy vé này một lần rồi, giờ không cho hủy lần 2 nữa đâu!");
+                    return;
+                }
+                var sql = "delete SEAT where SeatID = '" + seatid + "' and ProjectionID = '" + projectioid + "'" + " insert into [SEAT CANCEL] values ((select count(*) from [SEAT CANCEL]), '" + projectioid + "', N'" + seatid + "," + userid + "')";
+
+                var sql_get_ngaychieu = "select PROJECTION.Showday from TICKETINGLISTONLINE, SEAT, MEMBER, PROJECTION, MOVIES, MOVIETHEATER, ROOM  where TICKETINGLISTONLINE.ProjectionID = Seat.ProjectionID and MEMBER.USERID = TICKETINGLISTONLINE.USERID and PROJECTION.ProjectionID = TICKETINGLISTONLINE.ProjectionID and MOVIES.MOVIEID = PROJECTION.MovieID  and MOVIETHEATER.MovieTheaterID = ROOM.MovieTheaterID and ROOM.RoomID = PROJECTION.RoomID and PROJECTION.ProjectionID = '" + projectioid + "' and SeatID = '" + seatid + "'";
+                var _ngaythangnamchieu = await get1odulieutudb(sql_get_ngaychieu);
+                var _ngaychieu = (new Date(_ngaythangnamchieu)).getDate().toString();
+                var _thangchieu = (Number((new Date(_ngaythangnamchieu)).getMonth()) + 1).toString();
+                var _namchieu = (new Date(_ngaythangnamchieu)).getFullYear().toString();
+
+                var _sqlgiochieu = "select PROJECTION.Hours from TICKETINGLISTONLINE, SEAT, MEMBER, PROJECTION, MOVIES, MOVIETHEATER, ROOM  where TICKETINGLISTONLINE.ProjectionID = Seat.ProjectionID and MEMBER.USERID = TICKETINGLISTONLINE.USERID and PROJECTION.ProjectionID = TICKETINGLISTONLINE.ProjectionID and MOVIES.MOVIEID = PROJECTION.MovieID  and MOVIETHEATER.MovieTheaterID = ROOM.MovieTheaterID and ROOM.RoomID = PROJECTION.RoomID and PROJECTION.ProjectionID = '" + projectioid + "' and SeatID = '" + seatid + "'";
+                var _giochieu = await get1odulieutudb(_sqlgiochieu);
+                var _giochieu_final = Number(_giochieu.split(":")[0].toString());
+                var _phutchieu_final = Number(_giochieu.split(":")[1].toString());
+                var _Date_Hientai = new Date();
+                var _namhientai = _Date_Hientai.getFullYear();
+                var _thanghientai = _Date_Hientai.getMonth()+1;
+                var _ngayhientai = _Date_Hientai.getDate();
+
+                var _giohientai = _Date_Hientai.getHours();
+                var _phuthientai = _Date_Hientai.getMinutes();
+                var _sophutchieu = _giochieu_final * 60 + _phutchieu_final;
+                var _sophuthientai = _giohientai * 60 + _phuthientai;
+                if (_namchieu = _namhientai)
+                {
+                    if (_thangchieu == _thanghientai)
+                    {
+                        if (_ngaychieu == _ngayhientai)
+                        {
+                            if (_sophutchieu - _sophuthientai < 120)
+                            {
+                                alert("Không hủy vé được, vì đã gần tới giờ chiếu!");
+                                return;
+                            }
+                        }
+                    }
+                }
+                //Begin Khóa mục hủy vé lại
+                if (confirm("Bạn có muốn hủy vé thật không?") == true) {
+                    var ketqua;
+                    await insertdatabase(sql).then((r) => { ketqua = r; });
+                    sql = " insert into [SEAT CANCEL] values ((select count(*) from [SEAT CANCEL]), '" + projectioid + "', '" + seatid + "," + userid + "')";
+                    if (ketqua == "true") {
+                        alert("Đã hủy vé thành công");
+                        window.location.reload();
+                    }
+                }
+                //End khóa mục hủy vé
+                
+            })()
+            
+        }
+
+
+        if (window.location.href.lastIndexOf("ThanhVien") != -1) {
+            (async () => {
+                var userid = await getCookie('userid');
+
+                var sql_thongtinthanhvien = "select [Surname] from MEMBER where USERID = '" + userid + "'";
+                var hovaten = await get1odulieutudb(sql_thongtinthanhvien);
+                document.getElementById("tt_hovaten").value = hovaten;
+
+                sql_thongtinthanhvien = "select [MemberLoginName] from MEMBER where USERID = '" + userid + "'";
+                var username = await get1odulieutudb(sql_thongtinthanhvien);
+                document.getElementById("tt_username").value = username;
+
+                sql_thongtinthanhvien = "select [Email] from MEMBER where USERID = '" + userid + "'";
+                var email = await get1odulieutudb(sql_thongtinthanhvien);
+                document.getElementById("tt_email").value = email;
+
+                sql_thongtinthanhvien = "select [PhoneNumber] from MEMBER where USERID = '" + userid + "'";
+                var sdt = await get1odulieutudb(sql_thongtinthanhvien);
+                document.getElementById("tt_sdt").value = sdt;
+
+                sql_thongtinthanhvien = "select [DateOfBirth] from MEMBER where USERID = '" + userid + "'";
+                var ngaysinh = await get1odulieutudb(sql_thongtinthanhvien);
+                var ngay = (new Date(ngaysinh)).getDate().toString();
+                if (ngay < 10)
+                    ngay = "0" + ngay;
+                var thang = (Number((new Date(ngaysinh)).getMonth().toString()) + 1).toString();
+                if (thang < 10)
+                    thang = "0" + thang;
+                var nam = (new Date(ngaysinh)).getFullYear().toString();
+                var ngaythangnam = nam + "-" + thang + "-" + ngay;
+                document.getElementById("tt_ngaysinh").value = ngaythangnam;
+                
+                sql_thongtinthanhvien = "select [Gender] from MEMBER where USERID = '" + userid + "'";
+                var gioitinh = await get1odulieutudb(sql_thongtinthanhvien);
+                document.getElementById("tt_gioitinh").value = gioitinh;
+
+                sql_thongtinthanhvien = "select [Address] from MEMBER where USERID = '" + userid + "'";
+                var addr = await get1odulieutudb(sql_thongtinthanhvien);
+                document.getElementById("tt_diachi").value = addr;
+            })()
+        }
+        function update_thongtinthanhvien()
+        {
+            (async () => {
+                //Get hết data từ form
+                var tt_username = document.getElementById("tt_username").value.trim();
+                var tt_hovaten = document.getElementById("tt_hovaten").value.trim();
+                var tt_diachiemail = document.getElementById("tt_email").value.trim();
+                var tt_sodienthoai = document.getElementById("tt_sdt").value.trim();
+                var tt_ngaysinh = document.getElementById("tt_ngaysinh").value;
+                var tt_gioitinh = document.getElementById("tt_gioitinh").selectedIndex;
+                if (tt_gioitinh == 1)
+                    tt_gioitinh = "Nam";
+                else
+                    tt_gioitinh = "Nữ";
+                var tt_matkhau1 = document.getElementById("tt_matkhau1").value;
+                var tt_matkhau2 = document.getElementById("tt_matkhau2").value;
+                var tt_diachi = document.getElementById("tt_diachi").value;
+
+                if (tt_matkhau1 != tt_matkhau2)
+                {
+                    alert("Mật khẩu không trùng khớp!");
+                    return;
+                }
+                if (hamkiemtraemail(tt_diachiemail) != true)
+                {
+                    alert("Email không hợp lệ!");
+                    return;
+                }
+                //Begin rang buột dữ liệu phải khác chuỗi rổng
+                if (tt_hovaten == "")
+                {
+                    alert("Họ và tên không được rỗng!");
+                    return;
+                }
+                else if (tt_sodienthoai == "")
+                {
+                    alert("Số điện thoại không được rỗng!");
+                    return;
+                }
+                else if (tt_diachi == "") {
+                    alert("Địa chỉ không được rỗng!");
+                    return;
+                }
+                //End ràng buột dữ liệu phải khác chuỗi rỗng
+
+
+                var sql_update_thongtinthanhvien = "";
+                if (tt_matkhau1.trim() == "") {
+                    sql_update_thongtinthanhvien = "update MEMBER set Surname = N'" + tt_hovaten + "', DateOfBirth = '" + tt_ngaysinh + "', Address = N'" + tt_diachi + "', PhoneNumber = '" + tt_sodienthoai + "', Gender = N'" + tt_gioitinh + "', Email = '" + tt_diachiemail + "' where MemberLoginName = '" + tt_username + "'";
+                    var ketqua_EXE = await insertdatabase(sql_update_thongtinthanhvien);
+                    if (ketqua_EXE == "true")
+                        alert("Cập nhật thành công!");
+                    else
+                        alert("Cập nhật KHÔNG thành công!");
+                }
+                else if (tt_matkhau1.trim() != "")
+                {
+                    sql_update_thongtinthanhvien = "update MEMBER set Surname = N'" + tt_hovaten + "', DateOfBirth = '" + tt_ngaysinh + "', Address = N'" + tt_diachi + "', PhoneNumber = '" + tt_sodienthoai + "', Gender = N'" + tt_gioitinh + "', Password = '" + tt_matkhau1 + "', Email = '" + tt_diachiemail + "' where MemberLoginName = '" + tt_username + "'";
+                    
+                    var ketqua_EXE = await insertdatabase(sql_update_thongtinthanhvien);
+                    if (ketqua_EXE == "true")
+                        alert("Cập nhật thành công!");
+                    else
+                        alert("Cập nhật KHÔNG thành công!");
+                }
+                await xoacookie("hovaten").then(r => { });
+                await luucookie("hovaten", tt_hovaten).then(r => { });
+                window.location.reload();
+            })()
+        }
+
+
+        function hamtimkiemphim() {
+            //alert(document.getElementById("inputtimkiem").value);
+            window.location = "../Interface/TimKiem.aspx?s=" + document.getElementById("inputtimkiem").value; 
+        }
+
+        //VIết hàm load phim có lịch chiếu trong tháng lên
+        if (window.location.href.lastIndexOf("PhimDangChieu") != -1) {
+            document.getElementById('songaytrongthang').innerText = "List phim có lịch chiếu trong tháng";
+            
+        }
+
+        function chuyentrangquanlydanhsachphim(page) {
+            window.location = "../Interface/QuanLyDanhSachPhim.aspx?page=" + page;
+        }
+
+
+
+        //Hàm thêm phim - quản lý phim
+        function themphimmoi()
+        {
+            (async () => {
+                var tenphim = document.getElementById("txttenphimcanthem").value;
+                if (tenphim.trim() == "") {
+                    alert("Tên phim không được bỏ trống");
+                    return;
+                }
+                _sql = "insert into LINK values ((select max(LINK.MOVIEID) from LINK)+1, null, null) insert into MOVIES values ((select max(MOVIES.MOVIEID) from MOVIES) + 1, N'" + tenphim + "', null)";
+                if (await insertdatabase(_sql) == "true") {
+                    alert("Thêm phim thành công");
+                    window.location.reload();
+                }
+                else
+                    alert("Báo lỗi! không thêm được phim");
+            })()
+            
+        }
+
+        //Hàm sửa tên phim trong quản lý phim
+        function suaphim_quanlyphim(id) {
+            (async () => {
+                var tenphim = await get1odulieutudb("select TITLE from MOVIES where MOVIEID = " + id);
+                document.getElementById('txt_ten_phim_can_sua').value = tenphim;
+                document.getElementById("idcuaphim").innerText = id;
+            })()
+        }
+        function update_ten_phim() {
+            (async () => {
+                var _tenphim = document.getElementById('txt_ten_phim_can_sua').value;
+                var _idphim = document.getElementById("idcuaphim").innerText;
+                var _sql = "update MOVIES set TITLE = '" + _tenphim + "' where MOVIEID = " + _idphim;
+                if (await insertdatabase(_sql) == "true") {
+                    alert("Thay đổi tên phim thành công!");
+                    window.location.reload();
+                }
+                else
+                {
+                    alert("Thay đổi tên phim không thành công");
+                }
+            })()
+        }
+
+        
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">var scrolltotop = { setting: { startline: 100, scrollto: 0, scrollduration: 1e3, fadeduration: [500, 100] }, controlHTML: '<img src="https://i1155.photobucket.com/albums/p559/scrolltotop/arrow41.png" />', controlattrs: { offsetx: 5, offsety: 5 }, anchorkeyword: "#top", state: { isvisible: !1, shouldvisible: !1 }, scrollup: function () { this.cssfixedsupport || this.$control.css({ opacity: 0 }); var t = isNaN(this.setting.scrollto) ? this.setting.scrollto : parseInt(this.setting.scrollto); t = "string" == typeof t && 1 == jQuery("#" + t).length ? jQuery("#" + t).offset().top : 0, this.$body.animate({ scrollTop: t }, this.setting.scrollduration) }, keepfixed: function () { var t = jQuery(window), o = t.scrollLeft() + t.width() - this.$control.width() - this.controlattrs.offsetx, s = t.scrollTop() + t.height() - this.$control.height() - this.controlattrs.offsety; this.$control.css({ left: o + "px", top: s + "px" }) }, togglecontrol: function () { var t = jQuery(window).scrollTop(); this.cssfixedsupport || this.keepfixed(), this.state.shouldvisible = t >= this.setting.startline ? !0 : !1, this.state.shouldvisible && !this.state.isvisible ? (this.$control.stop().animate({ opacity: 1 }, this.setting.fadeduration[0]), this.state.isvisible = !0) : 0 == this.state.shouldvisible && this.state.isvisible && (this.$control.stop().animate({ opacity: 0 }, this.setting.fadeduration[1]), this.state.isvisible = !1) }, init: function () { jQuery(document).ready(function (t) { var o = scrolltotop, s = document.all; o.cssfixedsupport = !s || s && "CSS1Compat" == document.compatMode && window.XMLHttpRequest, o.$body = t(window.opera ? "CSS1Compat" == document.compatMode ? "html" : "body" : "html,body"), o.$control = t('<div id="topcontrol">' + o.controlHTML + "</div>").css({ position: o.cssfixedsupport ? "fixed" : "absolute", bottom: o.controlattrs.offsety, right: o.controlattrs.offsetx, opacity: 0, cursor: "pointer" }).attr({ title: "Scroll to Top" }).click(function () { return o.scrollup(), !1 }).appendTo("body"), document.all && !window.XMLHttpRequest && "" != o.$control.text() && o.$control.css({ width: o.$control.width() }), o.togglecontrol(), t('a[href="' + o.anchorkeyword + '"]').click(function () { return o.scrollup(), !1 }), t(window).bind("scroll resize", function (t) { o.togglecontrol() }) }) } }; scrolltotop.init();</script>
+<noscript>Not seeing a <a href="https://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
+
+
+</html>
